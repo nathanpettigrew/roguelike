@@ -38,27 +38,34 @@ function getDeltaTime()
 		
 	return deltaTime;
 }
+musicBackground = new Howl({
+		urls: ["Forest Song.ogg"],
+		loop: true,
+		buffer: true,
+		volume: 0.5
+	});
+musicBackground.play();
 
 //Run fuction to swap between game states
 function run()
 {
-	context.fillStyle = "#ccc";
-	context.fillRect(0, 0, canvas.width, canvas.height);
-	
-	var deltaTime = getDeltaTime();
-	
-	switch(gameState)
-	{
-		case STATE_SPLASH:
-		runSplash(deltaTime);
-		break;
-		case STATE_GAME:
-		runGame(deltaTime);
-		break;
-		case STATE_GAMEOVER:
-		runGameOver(deltaTime);
-		break;
-	}
+//	context.fillStyle = "#ccc";
+//	context.fillRect(0, 0, canvas.width, canvas.height);
+//	
+//	var deltaTime = getDeltaTime();
+//	
+//	switch(gameState)
+//	{
+//		case STATE_SPLASH:
+//		runSplash(deltaTime);
+//		break;
+//		case STATE_GAME:
+//		runGame(deltaTime);
+//		break;
+//		case STATE_GAMEOVER:
+//		runGameOver(deltaTime);
+//		break;
+//	}
 }
 
 //-------------------- Don't modify anything below here
