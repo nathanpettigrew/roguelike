@@ -38,6 +38,7 @@ function getDeltaTime()
 		
 	return deltaTime;
 }
+
 musicBackground = new Howl({
 		urls: ["Forest Song.ogg"],
 		loop: true,
