@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="64" tileheight="64" backgroundcolor="#262626" nextobjectid="1">
+ <tileset firstgid="1" name="ground tiles" tilewidth="64" tileheight="64" tilecount="756">
+  <image source="tileset.png" width="1344" height="2304"/>
+ </tileset>
+ <tileset firstgid="757" name="wallset" tilewidth="64" tileheight="64" tilecount="1020">
+  <image source="wallset.png" width="1280" height="3264"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt3QFupCAUxnGTHnzbO+zuHWZ6hjnEphfamo2RuA94Dx4o+P8lpk2rg8VvEMGxywIAAAAAAAAAAAAAAAAAAAAAAADAw+NtWZ4Fy+fb2XuOK3sV5qN0O9wDuUIL5AoteOaqtK9G/20+nrnybMNoD8dGrtBC6fH7I5y7vhKvpTlHhuc+cjW2XsdPU86LXE2DXPnKtct3uR4pPX5S/aXq7Mxcaa9TPY55br9Hfb9Y9eq3S/2xVP9Ms75npi3r1bwGubJvd2adpcomV/3F2oXw/S+dR6RrP3JFrnJK+jrWc5dn/yZVdmr8I0Su2jvj2uzsOvco/5jvY7uvzfisPHOlvR47u85b5HqGsRMvx/eVpg+W0qM+LeNGsXVb5Jpc7Wr6udo+vjdLv6bn8SVXu5pcabe1jquW7Evs9y2Or6YNrG33R9cjV9J6qWu6knGPWHmt+1E9tx2JV64eifejtS5rc1GyvaVNJVd5XrnavrfeU5MrK7d/ufZMez6ytMfkKs87Vx7W1/q1/FtajT0e82aZUyBXedpx81y919TXsc35CnKVGnusLTeHXPX1ELIm5dMy5vXj++t7sGy5Cn/2sfx/XMjVPLznENd8/lz2LMWW30LZnveUafuF5KqNFnWjzZWmX6RxVjbIVdyZufJS8zds2dbMF11tXvTKasaEYtf8I+VKeg3aoXre9869DLmyfoas5bwzufLVIleP76/PYNmyFP7sU/mavY43ufLlnStpjGptv6T2SdPOhOXW3teq7SuRq3o1Y6ka23lRGlfQbt8bubo+coUWPHNleZ5SybgB4wfj8MyVZXv64XMK5x23XJXcd1l6n01svvMu93jOKpx/luadt0Waf16lcllzjx5t19gs46Ox+welXH5E1i8Zt8B4tLmKtWPvifVr9wvjsuTqGVnIFY6k+RxpWedzYp9zkLaPra/tk5OrcjXPzfa6XrLMuUj9opLngdBvb+uu96qRKxvrsy/JVd06d2H9fBS5qlvnLnJ14XWfuKasKyNXNj3r4ox69/pfiuTKZvZctfycs1dZM7I+16DV8z5bLT3vSyFXu5799tlRNztyJStpp+9SNxq5c9PxPOL53I4eS+l5+/h3Wv83BmxGG78qLZO2p6+avvcZ7+fS/aXtAQAAAAAAAAAAAAAAAAAAAAAAANDaX9jJ5PU=
+  </data>
+ </layer>
+ <layer name="Collisions" width="150" height="100" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt2F1uqzAQBtBKXcTd/077UF2lDyQwnvEfnCNFjVLAjvlij/n6AgAAAAAAAAAAAAAAACr8+25/wTut+ZArPpErepAreqjMVaZWU7/dS3WuqsjV3uSKHjK5iqxd0bVPrvY26v5daUeu7kOuatmP/Bq5Dkb6Ul2rjdqDnl1DruLnVddXVc8lrn5Huaqz6n4wSq7Wkpk7jq41i1ztoaXWaVm7quqbiuvKVX8z9mazx7wqV2fz/pNV5mrkfizbz57XnP39Zovsza5er7eqvWaPfh29f6JMXmbNQ5G6ZuT9lauXbK6unltdt1/9f695aaV5ckWjcnX0Web+XG2v93o38tydVOXq0z2PjmU2Fy3nR/IrV+cqc/X/b3buj+Siaj2K/B7k6lx1riq0rnmZNuSq1lmdc3Xcs2MdmW/e9aGaXI1VVV//PTfSduu5UXI1VrYWztRfVbnK9Euu+pg5Ntk9wd/rZPow49y7u8PYVNWDR59Vzc1PM3MdrFLRZq/98FNV1+PR+qrqlSVXtWbnKnLMqP2iXOX1yNW7uaRlnmmtezJznlzl9V5rsvdr13qNvuSKHipyVbGujd4H0FflfNW6J5CT+4jOG5+uc/T+rM1P7bKv7POGs3y0tilXe4vmKjqHtdZFcrW3Ve/fqv3imlXv36r94hrr4P1knvlUjXu2zZY+ylVfmbHbedzlKib6e5er3DFPceV5YOT4TFsrk6uY6HNmucod8xQjx2LGuFftMeQq5gm5aj3Pc4Z2o9fBGa9R5OplZN1+d8bmRa6OWQdzRj+/2mUdPPreK625d5PN1WhVuaKvXWroiv4CAAAAAAAAAAAAAAAA9PQDyAVcOQ==
+  </data>
+ </layer>
+ <layer name="Normal Enemy Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1aERADAIBEFm6L9nJi4mGAQRuxW8+osAAAAAAAAAAAAAAAAAAAAAAAD4R+b2AgDg9mqzZgNT3Y/4GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAo5P8AHw==
+  </data>
+ </layer>
+ <layer name="Mini-Boss Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt10EJAAAIADHBDPavagoRcUtw34sAAAAAAAAAAAAAAAAAAACA3yq3CwAAAOAmTw0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwKQGhwsAMQ==
+  </data>
+ </layer>
+ <layer name="Damage Up Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7Al+PeMhX0ctAqaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8MZcBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKCzgZcABA==
+  </data>
+ </layer>
+ <layer name="Health Up Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgzqYAAB
+  </data>
+ </layer>
+ <layer name="Boss Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgzqYAAB
+  </data>
+ </layer>
+</map>
