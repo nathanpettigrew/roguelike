@@ -1,80 +1,83 @@
-
 var canvas = document.getElementById("gameCanvas");
 var context = canvas.getContext("2d");
 
-var startFrameMillis = Date.now();
-var endFrameMillis = Date.now();
+	//event handlers
+window.addEventListener('keydown', function(evt) { onKeyDown(evt) ; }, false);
+window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
 
-var keyboard = new Keyboard();
-
-//Creating game states
+	//constant values for gamestates
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
-
+var health = 7;
+var score = 0;
 var gameState = STATE_SPLASH;
 
+	//functions for Gamestates
+var splashTimer = 3;
+function runSplash (deltaTime)
+{
+	splashTimer -= deltaTime;
+	if(splashTimer <= 0)
+	{
+		gameState = STATE_GAME;
+		health = 10;
+		score = 0;
+		return;
+	}
+}
+function runGame()
+{
+	context.fillStyle = "#ccc"
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	var deltaTime = getDeltaTime();
+	
+	switch(gameState)
+	{
+		case STATE_SPLASH:
+			runSplash(deltaTime);
+			break;
+//		case STATE_GAME;
+			runGame(deltaTime);
+			break;
+		case STATE_GAMEOVER:
+			runGameOver(deltaTime);
+			break;
+	}
+}
+function runGameOver(deltaTime)
+{
+	splashTimer -= deltaTime;
+	if(splashTimer <= 0)
+	{
+		player.isDead = false;
+		splashTimer = 3;
+		gameState = STATE_SPLASH;
+		return;
+	}
+}
 
-
-
-
-//Delta Time stuff
-function getDeltaTime()
+var startFrameMillis = Date.now();
+var endFrameMillis = Date.now();
+function getDeltaTime()		//Only call this function once per frame
 {
 	endFrameMillis = startFrameMillis;
 	startFrameMillis = Date.now();
-
-		// Find the delta time (dt) - the change in time since the last drawFrame
-		// We need to modify the delta time to something we can use.
-		// We want 1 to represent 1 second, so if the delta is in milliseconds
-		// we divide it by 1000 (or multiply by 0.001). This will make our 
-		// animations appear at the right speed, though we may need to use
-		// some large values to get objects movement and rotation correct
 	var deltaTime = (startFrameMillis - endFrameMillis) * 0.001;
-	
-		// validate that the delta is within range
-	if(deltaTime > 1)
+	if (deltaTime >1)		//validate the delta is within range
+	{
 		deltaTime = 1;
-		
+	}
 	return deltaTime;
 }
 
-musicBackground = new Howl({
-		urls: ["Forest Song.ogg"],
-		loop: true,
-		buffer: true,
-		volume: 0.5
-	});
-musicBackground.play();
-
-//Run fuction to swap between game states
-function run()
-{
-//	context.fillStyle = "#ccc";
-//	context.fillRect(0, 0, canvas.width, canvas.height);
-//	
-//	var deltaTime = getDeltaTime();
-//	
-//	switch(gameState)
-//	{
-//		case STATE_SPLASH:
-//		runSplash(deltaTime);
-//		break;
-//		case STATE_GAME:
-//		runGame(deltaTime);
-//		break;
-//		case STATE_GAMEOVER:
-//		runGameOver(deltaTime);
-//		break;
-//	}
-}
-
 //-------------------- Don't modify anything below here
-
-
+//-------------------- if you do, stuff will break and the game will not run
 // This code will set up the framework so that the 'run' function is called 60 times per second.
 // We have a some options to fall back on in case the browser doesn't support our preferred method.
-(function() {
+(function() 
+{
   var onEachFrame;
   if (window.requestAnimationFrame) {
     onEachFrame = function(cb) {
@@ -95,4 +98,4 @@ function run()
   window.onEachFrame = onEachFrame;
 })();
 
-window.onEachFrame(run);
+window.onEachFrame(runGame);
