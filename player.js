@@ -19,7 +19,7 @@ var ANIM_MAX = 9;
 var Player = function()
 {
 	//need sprite name
-	this.sprite = new Sprite(".png");
+	this.sprite = new Sprite("mage.png");
 	
 	//For when we need to animate the player
 		//for(var i=0; i < ANIM_MAX; i++)
@@ -63,7 +63,7 @@ Player.prototype.update = function(deltaTime)
 		if(this.sprite.currentAnimation != ANIM_WALK_UP == false)
 			this.sprite.setAnimation(ANIM_WALK_UP);
 	}
-	else
+	else if(keyboard.isKeyDown(keyboard.S) == true)
 	{
 		down = true;
 		this.direction = DOWN;
@@ -97,6 +97,8 @@ Player.prototype.update = function(deltaTime)
 	//setting velocity
 	var wasleft = this.velocity.x < 0;
 	var wasright = this.velocity.x > 0;
+	var wasup = this.velocity.y > 0;
+	var wasdown = this.velocity.y < 0;
 	var ddx = 0;	
 	var ddy = 0;
 	
@@ -110,18 +112,28 @@ Player.prototype.update = function(deltaTime)
 	else if (wasright)
 		ddx = ddx - FRICTION;
 	
+	//check these
+	if(up)
+		ddy = ddy + ACCEL;
+	else if
+		ddy = ddy - FRICTION;
+	if(down)
+		ddy = ddy - ACCEL;
+	else if
+		ddy = ddy + FRICTION;
+	
 	//calculate the new position and velocity:
 	this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
 	this.position.x = Math.floor(this.position.x + (deltaTime * this.velocity.x));
 	this.velocity.x = bound(this.velocity.x + (deltaTime * ddx), -MAXDX, MAXDX);
 	this.velocity.y = bound(this.velocity.y + (deltaTime * ddy), -MAXDY, MAXDY);
 	
-	if  ((wasleft && (this.velocity.x > 0)) ||
-		 (wasright && (this.velocity.x < 0)))
-	 {
+	//if  ((wasleft && (this.velocity.x > 0)) ||
+		// (wasright && (this.velocity.x < 0)))
+	 //{
 		//clamp at zero to prevent friction from making us ji8ggle to side
-		this.velocity.x = 0;
-	 }
+		//this.velocity.x = 0;
+	 //}
 	
 	var tx = pixelToTile(this.position.x);
 	var ty = pixelToTile(this.position.y);
