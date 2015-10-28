@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="64" tileheight="64" backgroundcolor="#262626" nextobjectid="1">
+ <tileset firstgid="1" name="ground tiles" tilewidth="64" tileheight="64" tilecount="756">
+  <image source="tileset.png" width="1344" height="2304"/>
+ </tileset>
+ <tileset firstgid="757" name="wallset" tilewidth="64" tileheight="64" tilecount="1020">
+  <image source="wallset.png" width="1280" height="3264"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztnQ1u2zAMRg3k4PPusPUOac7QQwy90GKsRj1BlEiKciz7PYAo0NqJK33mn+RkmgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAggvttmt4d9ri9+srhyHw89fHj+XM22M+v8wAkFn38ev78bbC3CV1BGXQFPYjUlTdXI387H5G68uRqOSN/G59oXUmv9a404uw58OrqTyZ2fQqvtRyviZGPr/PR1fh4dLXYLFhLnv+Brk6DV1elOHZlXdX88lXqEW8czI3fQ3itV+tKW6dGzHmpdrlSPbJH3i7lY1J+pj1eqwlNnRo156XxHNkPW1n+z/tUjmnp7x+TvR6clWY9frGaJjT3TtSco6t/SH5hW5vl4sinoCtJo5Y+g9Vq84WujoMn17HGLm1+ptFV6b2l/kcvXaX31voekp+/Eq+ozby1qSZutvo8Lam+U7+f8/NXIlJX2npM41cks8TY3N96+ZIz9E6iuN90tZm2LresG3rzK03faNWsdGwPX4Kuvll1UIoxUg0m5fipH9ozb1//p/Ua9pxfdPVNS/0k+SaNf3lU6klJk5oY1ltXJR8Y5fdHp1VX3nNLNZ2n7yFdV688Sor1Hr9/RiJ0tZ3/1A95cuTWeOLRleRTa68fHcPPQpSu1r9Le2o816SZh1qOp41HqQ8q+RZ0VUfTN6+t5USPl+V1azle+vvFFs2kekvrjdJ7o6s62r65tJYToavU55Ty35yfidpTptUAuurDXTH/rT2v3PznYlP0njJNXoiu+rDVgXT/52JNa+89Ny/eOdasC0h5Ibrqg3ZcZ4Np56WWF2mtZX63OanW//VcPzoLWl312DMzZ8yqqVZdrdqu9dn2Wj86C9rehGVPsNbnWHXa02+wbhNL9N45rf/zPEPWc90ZXcXSQ1fS/jiPn9lrvtFVLC291By1/XFWP7Od79Z9rZo6Fl3F0NJL1RC5Pjh3NvoH4xCpK++zHJZz6B+MQZSuLDWpt29A/2AcInVlOZ88/Jxo1x1ra4/efTbS+15lj+dZ0aw7Llbbb5/TR2mP3nbNO33fK+3xPCuW/qi0fzCny9IaeG19kZg4PpZ9ArNg1uNL56Crc2DRlXX92rvmja7GR9PHX/tFlmfHpOM1a97oqo2Wz82Oqpcsay65flHt80By1Hwkumqj9ExcyUavl9CVDetnX151by26slHyP5HPH4w+7ujKRmm8IveJjz7u6MpGbbzmjFk19cpxj/ouRXRlozZeLc8uHGHcPXWG5jnno/x/R6UWB9P7vdfnffYyb9yeM3bE++ao1HQVlbdLc7WHea6Vfnsbpd51bn9ji66sezKjzONbc3661ONnL+j/1GJT2n9u6TNEfselJf+O+O4M7XdjgA/t2txR7mfP9eJ79qcl937F/ey9XnwPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPTmLxzYZOs=
+  </data>
+ </layer>
+ <layer name="Collisions" width="150" height="100" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt2F1uqzAQBtBKXcTd/077UF2lDyQwnvEfnCNFjVLAjvlij/n6AgAAAAAAAAAAAAAAACr8+25/wTut+ZArPpErepAreqjMVaZWU7/dS3WuqsjV3uSKHjK5iqxd0bVPrvY26v5daUeu7kOuatmP/Bq5Dkb6Ul2rjdqDnl1DruLnVddXVc8lrn5Huaqz6n4wSq7Wkpk7jq41i1ztoaXWaVm7quqbiuvKVX8z9mazx7wqV2fz/pNV5mrkfizbz57XnP39Zovsza5er7eqvWaPfh29f6JMXmbNQ5G6ZuT9lauXbK6unltdt1/9f695aaV5ckWjcnX0Web+XG2v93o38tydVOXq0z2PjmU2Fy3nR/IrV+cqc/X/b3buj+Siaj2K/B7k6lx1riq0rnmZNuSq1lmdc3Xcs2MdmW/e9aGaXI1VVV//PTfSduu5UXI1VrYWztRfVbnK9Euu+pg5Ntk9wd/rZPow49y7u8PYVNWDR59Vzc1PM3MdrFLRZq/98FNV1+PR+qrqlSVXtWbnKnLMqP2iXOX1yNW7uaRlnmmtezJznlzl9V5rsvdr13qNvuSKHipyVbGujd4H0FflfNW6J5CT+4jOG5+uc/T+rM1P7bKv7POGs3y0tilXe4vmKjqHtdZFcrW3Ve/fqv3imlXv36r94hrr4P1knvlUjXu2zZY+ylVfmbHbedzlKib6e5er3DFPceV5YOT4TFsrk6uY6HNmucod8xQjx2LGuFftMeQq5gm5aj3Pc4Z2o9fBGa9R5OplZN1+d8bmRa6OWQdzRj+/2mUdPPreK625d5PN1WhVuaKvXWroiv4CAAAAAAAAAAAAAAAA9PQDyAVcOQ==
+  </data>
+ </layer>
+ <layer name="Normal Enemy Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1aERADAIBEFm6L9nJi4mGAQRuxW8+osAAAAAAAAAAAAAAAAAAAAAAAD4R+b2AgDg9mqzZgNT3Y/4GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAo5P8AHw==
+  </data>
+ </layer>
+ <layer name="Mini-Boss Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt10EJAAAIADHBDPavagoRcUtw34sAAAAAAAAAAAAAAAAAAACA3yq3CwAAAOAmTw0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwKQGhwsAMQ==
+  </data>
+ </layer>
+ <layer name="Damage Up Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7Al+PeMhX0ctAqaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8MZcBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKCzgZcABA==
+  </data>
+ </layer>
+ <layer name="Health Up Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgzqYAAB
+  </data>
+ </layer>
+ <layer name="Boss Spawns" width="150" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgzqYAAB
+  </data>
+ </layer>
+</map>
