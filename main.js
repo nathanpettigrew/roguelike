@@ -3,7 +3,7 @@ var context = canvas.getContext("2d");
 
 	//event handlers
 window.addEventListener('keydown', function(evt) { onKeyDown(evt) ; }, false);
-window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
+//window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
 
 	//constant values for and other stuff lol kappa
 var STATE_SPLASH = 0;
@@ -50,8 +50,7 @@ var startFrameMillis = Date.now();
 var endFrameMillis = Date.now();
 function getDeltaTime()		//Only call this function once per frame
 {
-	endFrameMillis =
-	startFrameMillis;
+	endFrameMillis = startFrameMillis;
 	startFrameMillis = Date.now();
 	var deltaTime = (startFrameMillis - endFrameMillis) * 0.001;
 	if (deltaTime >1)		//validate the delta is within range
@@ -95,7 +94,7 @@ function run(deltaTime) {
 			case STATE_SPLASH:
 				runSplash(deltaTime);
 				break;
-			case STATE_GAME;
+			case STATE_GAME:
 				runGame(deltaTime);
 				break;
 			case STATE_GAMEOVER:
@@ -123,6 +122,74 @@ function run(deltaTime) {
     context.fillText("FPS: " + fps, 5, 20, 100);
 	
 }
+
+var worldOffsetX = 0;
+function drawMap()
+{
+	var startX = -1;
+	var maxTiles = Math.floor(SCREEN_WIDTH / TILE) + 2;
+	var tileX = pixelToTile(player.position.x);
+	var offsetX = TILE + Math.floor(player.position.x%TILE);
+	
+	startX = tileX - Math.floor(maxTiles / 2);
+	
+	if(startX < -1)
+	{
+		startX = 0;
+		offsetX = 0;
+	}
+	
+	if(startX > MAP.tw - maxTiles)
+	{
+		startX = MAP.tw - maxTiles + 1;
+		offsetX = TILE;
+	}
+	
+	worldOffsetX = startX * TILE + offsetX;
+	
+	 for(var layerIdx=0; layerIdx < LAYER_COUNT; layerIdx++)
+	 {
+		 for( var y =0; y < level1.layers[layerIdx].height; y++ )
+		 {
+			 var idx = y * level1.layers[layerIdx].width + startX;
+			 for(var x = startX; x < startX + maxTiles; x++)
+			 {
+				 if( level1.layers[layerIdx].data[idx] !=0)
+				 {
+					 var tileIndex = level1.layers[layerIdx].data[idx] - 1;
+					 var sx = TILESET_PADDING + ( tileIndex % TILESET_COUNT_X) * (TILESET_TILE + TILESET_SPACING);
+					 var sy = TILESET_PADDING + (Math.floor(tileIndex / TILESET_COUNT_Y)) * (TILESET_TILE + TILESET_SPACING);
+					 context.drawImage(tileset, sx, sy, TILESET_TILE, TILESET_TILE,
+						(x-startX)*TILE - offsetX, (y-1)*TILE, TILESET_TILE, TILESET_TILE);
+				 }
+				 idx++;
+			 }
+		 }
+	 }
+}
+ 
+
+function run()
+{
+	context.fillStyle = "#ccc";
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	var deltaTime = getDeltaTime();
+	
+	switch(gameState)
+	{
+		case STATE_SPLASH:
+		runSplash(deltaTime);
+		break;
+		case STATE_GAME:
+		runGame(deltaTime);
+		break;
+		case STATE_GAMEOVER:
+		runGameOver(deltaTime);
+		break;
+	}
+}
+
 
 //-------------------- Don't modify anything below here
 //-------------------- if you do, stuff will break and the game will not run

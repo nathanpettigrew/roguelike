@@ -33,6 +33,8 @@ var Player = function()
 	this.isDead = false;
 	this.velocity = new Vector2();
 	this.direction = LEFT;
+	
+	this.image.src = "mage.png";
 }
 
 Player.prototype.update = function(deltaTime)
@@ -185,5 +187,5 @@ Player.prototype.update = function(deltaTime)
 
 Player.prototype.draw = function()
 {
-	this.sprite.draw(context, this.position.x - worldOffsetX, this.position.y);
+	this.sprite.draw(context, this.position.x, this.position.y);
 }
