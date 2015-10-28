@@ -19,7 +19,8 @@ var ANIM_MAX = 9;
 var Player = function()
 {
 	//need sprite name
-	this.sprite = new Sprite("mage.png");
+	this.sprite = new Sprite("magespritesheet.png");
+	sprite.buildAnimation(4, 4, 64, 64, 0, [1]);
 	
 	//For when we need to animate the player
 		for(var i=0; i < ANIM_MAX; i++)
@@ -28,13 +29,14 @@ var Player = function()
 	}
 	
 	this.position = new Vector2();
-	this.position.set(200, 200);
+	this.position.set(0,0);
+	
+	this.width = 64;
+	this.height = 64;
 	
 	this.isDead = false;
 	this.velocity = new Vector2();
 	this.direction = LEFT;
-	
-	this.image.src = "mage.png";
 }
 
 Player.prototype.update = function(deltaTime)
