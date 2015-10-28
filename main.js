@@ -1,9 +1,12 @@
 var canvas = document.getElementById("gameCanvas");
 var context = canvas.getContext("2d");
 
+//var player = new Player();
+var keyboard = new Keyboard();
+
 	//event handlers
 window.addEventListener('keydown', function(evt) { onKeyDown(evt) ; }, false);
-window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
+//window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
 
 	//constant values for gamestates
 var STATE_SPLASH = 0;

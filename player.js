@@ -22,10 +22,13 @@ var Player = function()
 	this.sprite = new Sprite("mage.png");
 	
 	//For when we need to animate the player
-		//for(var i=0; i < ANIM_MAX; i++)
-	//{
-		//this.sprite.setAnimationOffset(i, -55, -87);
-	//}
+		for(var i=0; i < ANIM_MAX; i++)
+	{
+		this.sprite.setAnimationOffset(i, -55, -87);
+	}
+	
+	this.position = new Vector2();
+	this.position.set(200, 200);
 	
 	this.isDead = false;
 	this.velocity = new Vector2();
@@ -77,19 +80,19 @@ Player.prototype.update = function(deltaTime)
 			if(this.sprite.currentAnimation != ANIM_IDLE_LEFT)
 				this.sprite.setAnimation(ANIM_IDLE_LEFT);
 		}
-		else if(this.direction == RIGHT);
+		else if(this.direction == RIGHT)
 		{
 			if(this.sprite.currentAnimation != ANIM_IDLE_RIGHT)
 				this.sprite.setAnimation(ANIM_IDLE_RIGHT);
 		}
-		else if(this.direction == UP);
+		else if(this.direction == UP)
 		{
 			if(this.sprite.currentAnimation != ANIM_IDLE_UP)
 				this.sprite.setAnimation(ANIM_IDLE_UP);
 		}
 		else
 		{
-			if(this.currentAnimation != ANIM_IDLE_DOWN);
+			if(this.currentAnimation != ANIM_IDLE_DOWN)
 				this.sprite.setAnimation(ANIM_IDLE_DOWN);
 		}
 	}
@@ -113,14 +116,15 @@ Player.prototype.update = function(deltaTime)
 		ddx = ddx - FRICTION;
 	
 	//check these
-	if(up)
-		ddy = ddy + ACCEL;
-	else if
-		ddy = ddy - FRICTION;
-	if(down)
-		ddy = ddy - ACCEL;
-	else if
-		ddy = ddy + FRICTION;
+	//if(up)
+		//ddy = ddy + ACCEL;
+	//else if
+		//ddy = ddy - FRICTION;
+		
+	//if(down)
+		//ddy = ddy - ACCEL;
+	//else if
+		//ddy = ddy + FRICTION;
 	
 	//calculate the new position and velocity:
 	this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
