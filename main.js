@@ -1,14 +1,11 @@
 var canvas = document.getElementById("gameCanvas");
 var context = canvas.getContext("2d");
 
-//var player = new Player();
-var keyboard = new Keyboard();
-
 	//event handlers
 window.addEventListener('keydown', function(evt) { onKeyDown(evt) ; }, false);
-//window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
+window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
 
-	//constant values for gamestates
+	//constant values for and other stuff lol kappa
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
@@ -35,20 +32,9 @@ function runGame()
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	
 	var deltaTime = getDeltaTime();
-	
-	switch(gameState)
-	{
-		case STATE_SPLASH:
-			runSplash(deltaTime);
-			break;
-//		case STATE_GAME;
-			runGame(deltaTime);
-			break;
-		case STATE_GAMEOVER:
-			runGameOver(deltaTime);
-			break;
-	}
 }
+
+
 function runGameOver(deltaTime)
 {
 	splashTimer -= deltaTime;
@@ -60,12 +46,12 @@ function runGameOver(deltaTime)
 		return;
 	}
 }
-
 var startFrameMillis = Date.now();
 var endFrameMillis = Date.now();
 function getDeltaTime()		//Only call this function once per frame
 {
-	endFrameMillis = startFrameMillis;
+	endFrameMillis =
+	startFrameMillis;
 	startFrameMillis = Date.now();
 	var deltaTime = (startFrameMillis - endFrameMillis) * 0.001;
 	if (deltaTime >1)		//validate the delta is within range
@@ -73,6 +59,69 @@ function getDeltaTime()		//Only call this function once per frame
 		deltaTime = 1;
 	}
 	return deltaTime;
+}
+	// key constants
+var KEY_SPACE = 32;
+var KEY_LEFT = 37;
+var KEY_UP = 38;
+var KEY_RIGHT = 39;
+var KEY_DOWN = 40;
+
+var SCREEN_WIDTH = canvas.width;
+var SCREEN_HEIGHT = canvas.height;
+//--------------------- No modifying above this point
+
+
+
+
+function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
+    if (y2 + h2 < y1 ||
+        x2 + w2 < x1 ||
+        x2 > x1 + w1 ||
+        y2 > y1 + h1) {
+        return false;
+    }
+    return true;
+}
+
+function run(deltaTime) {
+	context.fillStyle = "#ccc";
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	player.update(deltaTime);
+    player.draw();
+
+			switch(gameState)
+		{
+			case STATE_SPLASH:
+				runSplash(deltaTime);
+				break;
+			case STATE_GAME;
+				runGame(deltaTime);
+				break;
+			case STATE_GAMEOVER:
+				runGameOver(deltaTime);
+				break;
+		}
+	
+	   //display score
+    context.fillStyle = "#000";
+    context.font = "32px Comic Sans MS";
+    context.fillText("Score: " + score, 800, 40);
+	
+	 // update the frame counter 
+    fpsTime += deltaTime;
+    fpsCount++;
+    if (fpsTime >= 1) {
+        fpsTime -= 1;
+        fps = fpsCount;
+        fpsCount = 0;
+    }
+
+    // draw the FPS
+    context.fillStyle = "#f00";
+    context.font = "14px Arial";
+    context.fillText("FPS: " + fps, 5, 20, 100);
+	
 }
 
 //-------------------- Don't modify anything below here
@@ -100,5 +149,4 @@ function getDeltaTime()		//Only call this function once per frame
   
   window.onEachFrame = onEachFrame;
 })();
-
 window.onEachFrame(runGame);
