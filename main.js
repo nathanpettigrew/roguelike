@@ -30,6 +30,7 @@ var health = 7;
 var score = 0;
 var gameState = STATE_GAME;
 
+
 	//functions for Gamestates
 var splashTimer = 3;
 
@@ -44,6 +45,14 @@ var KEY_DOWN = 40;
 
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
+
+//tile variables
+var TILE = 64;
+var MAP = {tw:102, th:64};
+var TILESET_TILE = TILE*2;
+var TILESET_PADDING = 2;
+var TILESET_COUNT_X = 14;
+var TILESET_COUNT_Y = 14;
 
 //Collision constants
 var METER = TILE;
