@@ -16,7 +16,7 @@ var Player = function()
 }
 
 Player.prototype.update = function(deltaTime)
-{
+{		
 	
 }
 
