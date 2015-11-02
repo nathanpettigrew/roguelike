@@ -45,6 +45,13 @@ var KEY_DOWN = 40;
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
+//Collision constants
+var METER = TILE;
+var MAXDX = METER * 10;
+var MAXDY = METER * 15;
+var ACCEL = MAXDX * 2;
+var FRICTION = MAXDX * 6;
+
 function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
     if (y2 + h2 < y1 ||
         x2 + w2 < x1 ||
