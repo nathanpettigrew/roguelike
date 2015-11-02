@@ -101,15 +101,7 @@ function drawMap()
 }
 
 function runSplash (deltaTime)
-{
-	// splashTimer -= deltaTime;
-	// if(splashTimer <= 0)
-	// {
-		// gameState = STATE_GAME;
-		// health = 10;
-		// score = 0;
-		// return;
-	// }
+    {
 	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) {
 		gameState = STATE_GAME;
 	}
@@ -125,6 +117,14 @@ function runGame()
 	player.draw();
 }
 
+function bound(value, min, max)
+{
+	if(value < min)
+		return.min;
+	if(value > max)
+		return max;
+	return value;
+}
 
 function runGameOver(deltaTime)
 {
