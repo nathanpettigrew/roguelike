@@ -110,11 +110,13 @@ function runGame()
 	
 	var deltaTime = getDeltaTime();
 	
+	
 	drawMap();
 	player.update();
 	player.draw();
 		for(var i=0; i<bullets.length; i++)
 	{
+		bullets[i].update(deltaTime);
 		bullets[i].draw();
 	}
 	

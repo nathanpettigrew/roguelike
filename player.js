@@ -38,17 +38,17 @@ Player.prototype.update = function(deltaTime)
 	if(keyboard.isKeyDown(keyboard.KEY_A) == true)
 	{
 		this.position.x -= 4;
-		this.direction = UP;
+		this.direction = LEFT;
 	}
 	if(keyboard.isKeyDown(keyboard.KEY_S) == true)
 	{
 		this.position.y += 4;
-		this.direction = UP;
+		this.direction = DOWN;
 	}
 	if(keyboard.isKeyDown(keyboard.KEY_D) == true)
 	{
 		this.position.x += 4;
-		this.direction = UP;
+		this.direction = RIGHT;
 	}
 	
 		if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true && this.cooldownTimer <= 0)
@@ -57,17 +57,26 @@ Player.prototype.update = function(deltaTime)
 		
 		if(this.direction == RIGHT)
 		{
-			var bullet = new Bullet(this.position.x, this.position.y, true);
+			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
 			bullets.push(bullet);
 		}
 		else if (this.direction == LEFT)
 		{
-			var bullet = new Bullet(this.position.x, this.position.y, false);
+			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
+			bullets.push(bullet);
+		}
+		else if (this.direction == UP)
+		{
+			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
+			bullets.push(bullet);
+		}
+		else 
+			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
 			bullets.push(bullet);
 		}
 		
 	}
-}
+
 
 Player.prototype.draw = function(deltaTime)
 {
