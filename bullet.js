@@ -18,13 +18,13 @@ var Bullet = function(x, y, direction)
 	this.direction = direction;
 	
 	if(this.direction == LEFT)
-		this.velocity.set(-MAXDX * 1, 0);
+		this.velocity.set(-MAXDX * 0.5, 0);
 	else if (this.direction == RIGHT) 
-		this.velocity.set(MAXDX * 1, 0);
+		this.velocity.set(MAXDX * 0.5, 0);
 	else if (this.direction == UP)
-		this.velocity.set(0, -MAXDY * 1);
+		this.velocity.set(0, -MAXDY * 0.5);
 	else
-		this.velocity.set(0, MAXDY * 1);
+		this.velocity.set(0, MAXDY * 0.5);
 }
 
 Bullet.prototype.update = function(deltaTime)
@@ -37,5 +37,6 @@ Bullet.prototype.update = function(deltaTime)
 Bullet.prototype.draw = function(deltaTime)
 {
 	var screenX = this.position.x - worldOffsetX;
-	this.sprite.draw(context, screenX, this.position.y);
+	var screenY = this.position.y - worldOffsetY;
+	this.sprite.draw(context, screenX, screenY, this.position.x this.position.y);
 }

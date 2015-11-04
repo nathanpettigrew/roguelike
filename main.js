@@ -71,6 +71,7 @@ function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
 }
 
 var worldOffsetX = 0;
+var worldOffsetY = 0;
 function drawMap()
 {
 for(var layerIdx=0; layerIdx<LAYER_COUNT; layerIdx++)
