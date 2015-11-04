@@ -53,7 +53,7 @@ var TILESET_SPACING = 0;
 //Collision constants
 var METER = TILE;
 var MAXDX = METER * 10;
-var MAXDY = METER * 15;
+var MAXDY = METER * 10;
 var ACCEL = MAXDX * 2;
 var FRICTION = MAXDX * 6;
 
@@ -113,12 +113,27 @@ function runGame()
 	
 	
 	drawMap();
-	player.update();
+	player.update(deltaTime);
 	player.draw();
+	var hit = false;
 		for(var i=0; i<bullets.length; i++)
 	{
 		bullets[i].update(deltaTime);
 		bullets[i].draw();
+	}
+	
+		for(var i=0; i < bullets.length; i++)
+	{
+		bullets[i].update(deltaTime);
+		if(bullets[i].position.x - worldOffsetX > SCREEN_WIDTH)
+		{
+			hit = true;
+		}
+		if(hit == true)
+		{
+			bullets.splice(i, 1);
+			break;
+		}
 	}
 	
 }
