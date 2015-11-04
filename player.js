@@ -20,19 +20,19 @@ Player.prototype.update = function(deltaTime)
 {		
 	if(keyboard.isKeyDown(keyboard.KEY_W) == true)
 	{
-		this.position.y -= 1;
+		this.position.y -= 1 * deltaTime;
 	}
 	if(keyboard.isKeyDown(keyboard.KEY_A) == true)
 	{
-		this.position.x -= 1;
+		this.position.x -= 1 * deltaTime;
 	}
 	if(keyboard.isKeyDown(keyboard.KEY_S) == true)
 	{
-		this.position.y += 1;
+		this.position.y += 1 * deltaTime;
 	}
 	if(keyboard.isKeyDown(keyboard.KEY_D) == true)
 	{
-		this.position.x += 1;
+		this.position.x += 1 * deltaTime;
 	}
 }
 
