@@ -30,13 +30,13 @@ var Bullet = function(x, y, direction)
 Bullet.prototype.update = function(deltaTime)
 {
 	this.sprite.update(deltaTime);
-	this.position.x = Math.floor(this.position.x + (deltaTime * this.velocity.x));
-	this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
+	this.position.x = this.position.x + (deltaTime * this.velocity.x);
+	this.position.y = this.position.y + (deltaTime * this.velocity.y);
 }
 
 Bullet.prototype.draw = function(deltaTime)
 {
-	var screenX = this.position.x - worldOffsetX;
-	var screenY = this.position.y - worldOffsetY;
-	this.sprite.draw(context, screenX, screenY, this.position.x, this.position.y);
+	var screenX = this.position.x;// - worldOffsetX;
+	var screenY = this.position.y;// - worldOffsetY;
+	this.sprite.draw(context, screenX, screenY);
 }
