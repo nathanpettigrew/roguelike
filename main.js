@@ -56,7 +56,7 @@ var MAXDX = METER * 10;
 var MAXDY = METER * 10;
 var ACCEL = MAXDX * 2;
 var FRICTION = MAXDX * 6;
-
+var enemies = [];
 var tileset = document.createElement("img");
 tileset.src = "tileset.png";
 
@@ -161,6 +161,48 @@ function runGameOver(deltaTime)
 		return;
 	}
 }
+
+function spawnEnemy() {
+    idx = 0;
+    for (var y = 0; y < level1.layers[LAYER_OBJECT_ENEMIES].height; y++) {
+        for (var x = 0; x < level1.layers[LAYER_OBJECT_ENEMIES].width; x++) {
+            if (level1.layers[LAYER_OBJECT_ENEMIES].data[idx] != 0) {
+                var px = tileToPixel(x);
+                var py = tileToPixel(y);
+                var e = new Enemy(px, py);
+                enemies.push(e);
+            }
+            idx++;
+        }
+    }
+}
+
+var cells = []; //the array that holds our simplified collison data
+function initialize() {
+    for (var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) {
+        cells[layerIdx] = [];
+        var idx = 0;
+        for (var y = 0; y < level1.layers[layerIdx].height; y++) {
+            cells[layerIdx][y] = [];
+            for (var x = 0; x < level1.layers[layerIdx].width; x++) {
+                if (level1.layers[layerIdx].data[idx] != 0) {
+
+                    cells[layerIdx][y][x] = 1;
+                    cells[layerIdx][y - 1][x] = 1;
+                    cells[layerIdx][y - 1][x + 1] = 1;
+                    cells[layerIdx][y][x + 1] = 1;
+
+                }
+                ++idx;
+            }
+        }
+    }
+
+    spawnEnemy();
+
+        
+    };
+
 
 function run(deltaTime) {
 	context.fillStyle = "#ccc";
