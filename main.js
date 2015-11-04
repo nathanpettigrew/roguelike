@@ -47,7 +47,7 @@ var TILESET_TILE = 64;
 var TILESET_PADDING = 0;
 var TILESET_COUNT_X = 21;
 var TILESET_COUNT_Y = 36;
-var LAYER_COUNT = 2;
+var LAYER_COUNT = 3;
 var TILESET_SPACING = 0;
 
 //Collision constants
