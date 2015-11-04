@@ -51,31 +51,38 @@ Player.prototype.update = function(deltaTime)
 		this.direction = RIGHT;
 	}
 	
-		if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true && this.cooldownTimer <= 0)
+	if(keyboard.isKeyDown(keyboard.KEY_UP) == true && this.cooldownTimer <= 0)
 	{
 		this.cooldownTimer = 0.3;
-		
-		if(this.direction == RIGHT)
-		{
-			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
-			bullets.push(bullet);
-		}
-		else if (this.direction == LEFT)
-		{
-			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
-			bullets.push(bullet);
-		}
-		else if (this.direction == UP)
-		{
-			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
-			bullets.push(bullet);
-		}
-		else 
-			var bullet = new Bullet(this.position.x, this.position.y, this.direction);
-			bullets.push(bullet);
-		}
-		
+
+		var bullet = new Bullet(this.position.x, this.position.y, UP);
+		bullets.push(bullet);		
 	}
+
+	if(keyboard.isKeyDown(keyboard.KEY_DOWN) == true && this.cooldownTimer <= 0)
+	{
+		this.cooldownTimer = 0.3;
+
+		var bullet = new Bullet(this.position.x, this.position.y, DOWN);
+		bullets.push(bullet);		
+	}
+
+	if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true && this.cooldownTimer <= 0)
+	{
+		this.cooldownTimer = 0.3;
+
+		var bullet = new Bullet(this.position.x, this.position.y, LEFT);
+		bullets.push(bullet);		
+	}
+
+	if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true && this.cooldownTimer <= 0)
+	{
+		this.cooldownTimer = 0.3;
+
+		var bullet = new Bullet(this.position.x, this.position.y, RIGHT);
+		bullets.push(bullet);		
+	}
+}
 
 
 Player.prototype.draw = function(deltaTime)
