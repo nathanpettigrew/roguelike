@@ -44,3 +44,11 @@ Vector2.prototype.copy = function(otherVector)
 	temp.y = this.y;
 	return temp;
 }
+
+
+
+
+
+
+
+
