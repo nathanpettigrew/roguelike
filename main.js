@@ -1,12 +1,6 @@
 var canvas = document.getElementById("gameCanvas");
 var context = canvas.getContext("2d");
 
-	// event handlers
-// window.addEventListener('keydown', function(evt) { onKeyDown(evt) ; }, false);
-// window.addEventListener('keyup', function(evt) { onKeyUp(evt) ; }, false);
-
-	//constant values for and other stuff lol kappa
-
 var startFrameMillis = Date.now();
 var endFrameMillis = Date.now();
 function getDeltaTime()		//Only call this function once per frame
@@ -20,9 +14,7 @@ function getDeltaTime()		//Only call this function once per frame
 	}
 	return deltaTime;
 }
-	// key constants
 
-// --------------------- No modifying above this point
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
@@ -33,6 +25,8 @@ var gameState = STATE_GAME;
 
 	//functions for Gamestates
 var splashTimer = 3;
+
+var bullets = [];
 
 var player = new Player();
 var keyboard = new Keyboard();
@@ -117,9 +111,13 @@ function runGame()
 	var deltaTime = getDeltaTime();
 	
 	drawMap();
-	
 	player.update();
 	player.draw();
+		for(var i=0; i<bullets.length; i++)
+	{
+		bullets[i].draw();
+	}
+	
 }
 
 function bound(value, min, max)
