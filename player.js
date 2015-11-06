@@ -82,6 +82,26 @@ Player.prototype.update = function(deltaTime)
 		var bullet = new Bullet(this.position.x, this.position.y, RIGHT);
 		bullets.push(bullet);		
 	}
+	
+	// calculate the new position and velocity:
+	this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
+	this.position.x = Math.floor(this.position.x + (deltaTime * this.velocity.x));
+
+	// collision detection
+	// Our collision detection logic is greatly simplified by the fact that the player is a rectangle
+	// and is exactly the same size as a single tile. So we know that the player can only ever
+	// occupy 1, 2 or 4 cells.
+	// This means we can short-circuit and avoid building a general purpose collision detection
+	// engine by simply looking at the 1 to 4 cells that the player occupies:
+	var tx = pixelToTile(this.position.x);
+	var ty = pixelToTile(this.position.y);
+	var nx = (this.position.x)%TILE; // true if player overlaps right
+	var ny = (this.position.y)%TILE; // true if player overlaps below
+	var cell = cellAtTileCoord(LAYER_PLATFORMS, tx, ty);
+	var cellright = cellAtTileCoord(LAYER_PLATFORMS, tx + 1, ty);
+	var celldown = cellAtTileCoord(LAYER_PLATFORMS, tx, ty + 1);
+	var celldiag = cellAtTileCoord(LAYER_PLATFORMS, tx + 1, ty + 1);
+
 }
 
 
