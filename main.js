@@ -89,6 +89,37 @@ function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
     return true;
 }
 
+function tileToPixel(tile)
+{
+return tile * TILE;
+};
+function pixelToTile(pixel)
+{
+return Math.floor(pixel/TILE);
+};
+function bound(value, min, max)
+{
+if(value < min)
+return min;
+if(value > max)
+return max;
+return value;
+}
+
+function cellAtPixelCoord(layer, x, y) {
+	if (x < 0 || x > SCREEN_WIDTH || y < 0) return 1;
+	// let the player drop of the bottom of the screen (this means death)
+	if (y > SCREEN_HEIGHT) return 0;
+	return cellAtTileCoord(layer, p2t(x), p2t(y));
+};
+
+function cellAtTileCoord(layer, tx, ty) {
+	if (tx < 0 || tx >= MAP.tw || ty < 0) return 1;
+	// let the player drop of the bottom of the screen (this means death)
+	if (ty >= MAP.th) return 0;
+	return cells[layer][ty][tx];
+};
+
 var worldOffsetX = 0;
 var worldOffsetY = 0;
 function drawMap()
@@ -227,43 +258,7 @@ function initialize() {
 	
 
 
-function tileToPixel(tile)
-{
-return tile * TILE;
-};
-function pixelToTile(pixel)
-{
-return Math.floor(pixel/TILE);
-};
-function bound(value, min, max)
-{
-if(value < min)
-return min;
-if(value > max)
-return max;
-return value;
-}
 
-function cellAtPixelCoord(layer, x,y)
-{
-if(x<0 || x>SCREEN_WIDTH) // remove ‘|| y<0’
-return 1;
-// let the player drop of the bottom of the screen
-// (this means death)
-if(y>SCREEN_HEIGHT)
-return 0;
-return cellAtTileCoord(layer, p2t(x), p2t(y));
-};
-function cellAtTileCoord(layer, tx, ty) // remove ‘|| y<0’
-{
-if(tx<0 || tx>=MAP.tw)
-return 1;
-// let the player drop of the bottom of the screen
-// (this means death)
-if(ty>=MAP.th)
-return 0;
-return cells[layer][ty][tx];
-};
 
 
 
