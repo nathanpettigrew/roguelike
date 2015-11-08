@@ -18,7 +18,7 @@ function getDeltaTime()		//Only call this function once per frame
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
-var gameState = STATE_GAME;
+var gameState = STATE_SPLASH;
 
 
 	//functions for Gamestates
@@ -37,9 +37,10 @@ var keyboard = new Keyboard();
 //var KEY_RIGHT = 39;
 //var KEY_DOWN = 40;
 
-var LAYER_COUNT = 3;
 var LAYER_BACKGOUND = 0;
 var LAYER_PLATFORMS = 1;
+var LAYER_OBJECT_ENEMIES = 2;
+var LAYER_COUNT = 3;
 
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
@@ -75,6 +76,20 @@ function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
     return true;
 }
 
+function cellAtPixelCoord(layer, x, y) {
+	if (x < 0 || x > SCREEN_WIDTH || y < 0) return 1;
+	// let the player drop of the bottom of the screen (this means death)
+	if (y > SCREEN_HEIGHT) return 0;
+	return cellAtTileCoord(layer, p2t(x), p2t(y));
+};
+
+function cellAtTileCoord(layer, tx, ty) {
+	if (tx < 0 || tx >= MAP.tw || ty < 0) return 1;
+	// let the player drop of the bottom of the screen (this means death)
+	if (ty >= MAP.th) return 0;
+	return cells[layer][ty][tx];
+};
+
 function tileToPixel(tile)
 {
 	return tile * TILE;
@@ -93,20 +108,6 @@ function bound(value, min, max)
 		return max;
 		return value;
 }
-
-function cellAtPixelCoord(layer, x, y) {
-	if (x < 0 || x > SCREEN_WIDTH || y < 0) return 1;
-	// let the player drop of the bottom of the screen (this means death)
-	if (y > SCREEN_HEIGHT) return 0;
-	return cellAtTileCoord(layer, p2t(x), p2t(y));
-};
-
-function cellAtTileCoord(layer, tx, ty) {
-	if (tx < 0 || tx >= MAP.tw || ty < 0) return 1;
-	// let the player drop of the bottom of the screen (this means death)
-	if (ty >= MAP.th) return 0;
-	return cells[layer][ty][tx];
-};
 
 var worldOffsetX = 0;
 var worldOffsetY = 0;
@@ -138,6 +139,9 @@ function drawMap()
 
 function runSplash (deltaTime)
 {
+	context.fillStyle = "#ccc"
+	context.fillRect(0, 0, canvas.width, canvas.height);
+
 	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) 
 	{
 		gameState = STATE_GAME;
@@ -217,8 +221,8 @@ function initialize() {
 			for (var x = 0; x < level1.layers[layerIdx].width; x++) {
 				if (level1.layers[layerIdx].data[idx] != 0) {
 					// for each tile we find in the layer data, we need to create 4 collisions
-					// (because our collision squares are 35x35 but the tile in the
-					// level are 70x70)
+					// (because our collision squares are 64x64 but the tile in the
+					// level are 64x64)
 					cells[layerIdx][y][x] = 1;
 					cells[layerIdx][y - 1][x] = 1;
 					cells[layerIdx][y - 1][x + 1] = 1;
