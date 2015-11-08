@@ -18,24 +18,24 @@ function getDeltaTime()		//Only call this function once per frame
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
-var health = 7;
-var score = 0;
 var gameState = STATE_GAME;
 
 
 	//functions for Gamestates
 var splashTimer = 3;
 
+//'arrays'
 var bullets = [];
+var enemies = [];
 
 var player = new Player();
 var keyboard = new Keyboard();
 
-var KEY_SPACE = 32;
-var KEY_LEFT = 37;
-var KEY_UP = 38;
-var KEY_RIGHT = 39;
-var KEY_DOWN = 40;
+//var KEY_SPACE = 32;
+//var KEY_LEFT = 37;
+//var KEY_UP = 38;
+//var KEY_RIGHT = 39;
+//var KEY_DOWN = 40;
 
 var LAYER_COUNT = 3;
 var LAYER_BACKGOUND = 0;
@@ -60,25 +60,11 @@ var MAXDX = METER * 10;
 var MAXDY = METER * 10;
 var ACCEL = MAXDX * 2;
 var FRICTION = MAXDX * 6;
-var enemies = [];
 var cells = [];
 var tileset = document.createElement("img");
 tileset.src = "tileset.png";
 
-// abitrary choice for 1m
-var METER = TILE;
-// very exaggerated gravity (6x)
-var GRAVITY = METER * 9.8 * 6;
-// max horizontal speed (10 tiles per second)
-var MAXDX = METER * 10;
-// max vertical speed (15 tiles per second)
-var MAXDY = METER * 15;
-// horizontal acceleration - take 1/2 second to reach maxdx
-var ACCEL = MAXDX * 2;
-// horizontal friction - take 1/6 second to stop from maxdx
-var FRICTION = MAXDX * 6;
-// (a large) instantaneous jump impulse
-
+//intersects function
 function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
     if (y2 + h2 < y1 ||
         x2 + w2 < x1 ||
@@ -91,19 +77,21 @@ function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
 
 function tileToPixel(tile)
 {
-return tile * TILE;
+	return tile * TILE;
 };
+
 function pixelToTile(pixel)
 {
-return Math.floor(pixel/TILE);
+	return Math.floor(pixel/TILE);
 };
+
 function bound(value, min, max)
 {
-if(value < min)
-return min;
-if(value > max)
-return max;
-return value;
+	if(value < min)
+		return min;
+	if(value > max)
+		return max;
+		return value;
 }
 
 function cellAtPixelCoord(layer, x, y) {
@@ -124,44 +112,45 @@ var worldOffsetX = 0;
 var worldOffsetY = 0;
 function drawMap()
 {
-for(var layerIdx=0; layerIdx<LAYER_COUNT; layerIdx++)
-{
-var idx = 0;
-for( var y = 0; y < level1.layers[layerIdx].height; y++ )
-{
-for( var x = 0; x < level1.layers[layerIdx].width; x++ )
-{
-if( level1.layers[layerIdx].data[idx] != 0 )
-{
-// the tiles in the Tiled map are base 1 (meaning a value of 0 means no tile), so subtract one from the tileset id to get the
-// correct tile
-var tileIndex = level1.layers[layerIdx].data[idx] - 1;
-var sx = TILESET_PADDING + (tileIndex % TILESET_COUNT_X) * (TILESET_TILE + TILESET_SPACING);
-var sy = TILESET_PADDING + (Math.floor(tileIndex / TILESET_COUNT_X)) * (TILESET_TILE + TILESET_SPACING);
-context.drawImage(tileset, sx, sy, TILESET_TILE, TILESET_TILE, x*TILE, (y-1)*TILE, TILESET_TILE, TILESET_TILE);
-}
-idx++;
-}
-}
-}
+	for(var layerIdx=0; layerIdx<LAYER_COUNT; layerIdx++)
+	{
+		var idx = 0;
+		for( var y = 0; y < level1.layers[layerIdx].height; y++ )
+		{
+			for( var x = 0; x < level1.layers[layerIdx].width; x++ )
+			{
+				if( level1.layers[layerIdx].data[idx] != 0 )
+				{	
+					// the tiles in the Tiled map are base 1 (meaning a value of 0 means no tile), so subtract one from the tileset id to get the
+					// correct tile
+					var tileIndex = level1.layers[layerIdx].data[idx] - 1;
+					var sx = TILESET_PADDING + (tileIndex % TILESET_COUNT_X) * (TILESET_TILE + TILESET_SPACING);
+					var sy = TILESET_PADDING + (Math.floor(tileIndex / TILESET_COUNT_X)) * (TILESET_TILE + TILESET_SPACING);
+					context.drawImage(tileset, sx, sy, TILESET_TILE, TILESET_TILE, x*TILE, (y-1)*TILE, TILESET_TILE, TILESET_TILE);
+				}
+				idx++;
+			}
+		}
+	}
 }
 
 
 
 function runSplash (deltaTime)
-    {
-	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) {
+{
+	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) 
+	{
 		gameState = STATE_GAME;
 	}
 }
+
 function runGame()
 {
 	context.fillStyle = "#ccc"
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	
 	var deltaTime = getDeltaTime();
-	
-	
+		
 	drawMap();
 	player.update(deltaTime);
 	player.draw();
@@ -186,15 +175,6 @@ function runGame()
 		}
 	}
 	
-}
-
-function bound(value, min, max)
-{
-	if(value < min)
-		return min;
-	if(value > max)
-		return max;
-	return value;
 }
 
 function runGameOver(deltaTime)
@@ -252,52 +232,26 @@ function initialize() {
 		}
 	}
     spawnEnemy();
-
-        
+ 
     };
-	
 
-
-
-
-
-
-function run(deltaTime) {
+function run(deltaTime) 
+{
 	context.fillStyle = "#ccc";
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	
-		switch(gameState)
-		{
-			case STATE_SPLASH:
-				runSplash(deltaTime);
-				break;
-			case STATE_GAME:
-				runGame(deltaTime);
-				break;
-			case STATE_GAMEOVER:
-				runGameOver(deltaTime);
-				break;
-		}
-	
-	   //display score
-    context.fillStyle = "#000";
-    context.font = "32px Comic Sans MS";
-    context.fillText("Score: " + score, 800, 40);
-	
-	 // update the frame counter 
-    fpsTime += deltaTime;
-    fpsCount++;
-    if (fpsTime >= 1) {
-        fpsTime -= 1;
-        fps = fpsCount;
-        fpsCount = 0;
-    }
-
-    // draw the FPS
-    context.fillStyle = "#f00";
-    context.font = "14px Arial";
-    context.fillText("FPS: " + fps, 5, 20, 100);
-	
+	switch(gameState)
+	{
+		case STATE_SPLASH:
+			runSplash(deltaTime);
+			break;
+		case STATE_GAME:
+			runGame(deltaTime);
+			break;
+		case STATE_GAMEOVER:
+			runGameOver(deltaTime);
+			break;
+	}
 }
 
 
