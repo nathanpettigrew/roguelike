@@ -203,8 +203,8 @@ function spawnEnemy() {
             if (level1.layers[LAYER_OBJECT_ENEMIES].data[idx] != 0) {
                 var px = tileToPixel(x);
                 var py = tileToPixel(y);
-                var e = new Enemy(px, py);
-                enemies.push(e);
+                //var e = new Enemy(px, py);
+                //enemies.push(e);
             }
             idx++;
         }
@@ -224,9 +224,9 @@ function initialize() {
 					// (because our collision squares are 64x64 but the tile in the
 					// level are 64x64)
 					cells[layerIdx][y][x] = 1;
-					cells[layerIdx][y - 1][x] = 1;
-					cells[layerIdx][y - 1][x + 1] = 1;
-					cells[layerIdx][y][x + 1] = 1;
+				//	cells[layerIdx][y - 1][x] = 1;
+				//	cells[layerIdx][y - 1][x + 1] = 1;
+				//	cells[layerIdx][y][x + 1] = 1;
 				} else if (cells[layerIdx][y][x] != 1) {
 					// if we haven't set this cell's value, then set it to 0 now
 					cells[layerIdx][y][x] = 0;
