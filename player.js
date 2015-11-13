@@ -73,14 +73,14 @@ Player.prototype.update = function(deltaTime)
 		ddx = ddx - FRICTION;
 	
 	if (up)
-		ddy = ddy - ACCEL;
+		ddy = ddy + ACCEL;
 	else if (wasup)
-		ddy = ddy + FRICTION;
+		ddy = ddy - FRICTION;
 	
 	if (down)
-		ddy = ddy + ACCEL;
+		ddy = ddy - ACCEL;
 	else if (wasdown)
-		ddy = ddy - FRICTION;
+		ddy = ddy + FRICTION;
 	
 	if(keyboard.isKeyDown(keyboard.KEY_UP) == true && this.cooldownTimer <= 0)
 	{
@@ -178,8 +178,6 @@ Player.prototype.update = function(deltaTime)
 		{
 			this.position.y = tileToPixel(ty + 1);
 			this.velocity.y = 0;
-			cell = celldown;
-			cellright = celldiag;
 			ny = 0;
 		}
 	}
