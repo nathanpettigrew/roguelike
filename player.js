@@ -171,7 +171,7 @@ Player.prototype.update = function(deltaTime)
 
 Player.prototype.draw = function(deltaTime)
 {
-	context.drawImage(this.image, this.position.x- worldOffsetX, this.position.y);
+	context.drawImage(this.image, this.position.x- worldOffsetX, this.position.y - worldOffsetY);
 		//this.draw(context,
 		  //this.position.x - worldOffsetX,
 		  //this.position.y);

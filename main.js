@@ -113,7 +113,7 @@ var worldOffsetY = 0;
 function drawMap(){
 
 	var startX = -1;
-	var startY = 0;
+	var startY = -1;
 	var maxTiles = Math.floor(SCREEN_WIDTH / TILE) + 2;
 	var maxTiles = Math.floor(SCREEN_HEIGHT /  TILE) + 2;
 	var tileX = pixelToTile(player.position.x);
@@ -132,12 +132,15 @@ function drawMap(){
 		offsetX = TILE;
 	}
 	worldOffsetX = startX * TILE + offsetX;
-	if (startY < 0) {
+	
+	startY = tileY - Math.floor(maxTiles / 2);
+	
+	if (startY < -1) {
 		startY = 0;
 		offsetY = 0;
 	}
-	if (startY > MAP.tw - maxTiles) {
-		startY = MAP.tw - maxTiles + 1;
+	if (startY > MAP.th - maxTiles) {
+		startY = MAP.th - maxTiles + 1;
 		offsetY = TILE;
 	}
 	worldOffsetY = startY * TILE + offsetY;
@@ -156,7 +159,7 @@ function drawMap(){
 					var tileIndex = level1.layers[layerIdx].data[idx] - 1;
 					var sx = TILESET_PADDING + (tileIndex % TILESET_COUNT_X) * (TILESET_TILE + TILESET_SPACING);
 					var sy = TILESET_PADDING + (Math.floor(tileIndex / TILESET_COUNT_X)) * (TILESET_TILE + TILESET_SPACING);
-					context.drawImage(tileset, sx, sy, TILESET_TILE, TILESET_TILE, x*TILE - worldOffsetX, (y)*TILE, TILESET_TILE, TILESET_TILE);
+					context.drawImage(tileset, sx, sy, TILESET_TILE, TILESET_TILE, x*TILE - worldOffsetX, (y)*TILE - worldOffsetY, TILESET_TILE, TILESET_TILE);
 				}
 				idx++;
 			}
