@@ -42,7 +42,7 @@ Bullet.prototype.update = function(deltaTime)
 
 Bullet.prototype.draw = function(deltaTime)
 {
-	var screenX = this.position.x;// - worldOffsetX;
-	var screenY = this.position.y;// - worldOffsetY;
+	var screenX = this.position.x - worldOffsetX;
+	var screenY = this.position.y - worldOffsetY;
 	this.sprite.draw(context, screenX, screenY);
 }
