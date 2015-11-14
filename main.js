@@ -20,7 +20,7 @@ var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
 var STATE_WIN = 3;
 var lives = 3;
-var score = 0;
+var score = 15;
 var gameState = STATE_SPLASH;
 
 //functions for Gamestates
@@ -209,12 +209,27 @@ function runGame()
 		bullets[i].draw();
 	}
 	
+	var hit = false;
 	for(var i=0; i < bullets.length; i++)
 	{
 		bullets[i].update(deltaTime);
 		if(bullets[i].position.x - worldOffsetX > SCREEN_WIDTH)
 		{
 			hit = true;
+		}
+		
+		for(var j=0; j<enemies.length; j++)
+		{
+			if(intersects( bullets[i].position.x, bullets[i].position.y, TILE, TILE, 
+			enemies[j].position.x, enemies[j].position.y, TILE, TILE) == true)
+			{
+				//kill the bullet and enemy
+				enemies.splice(j, 1);
+				hit = true;
+				//increment the player score
+				score -= 1;
+				break;
+			}
 		}
 		if(hit == true)
 		{
