@@ -23,7 +23,7 @@ var lives = 3;
 var score = 0;
 var gameState = STATE_SPLASH;
 
-	//functions for Gamestates
+//functions for Gamestates
 var splashTimer = 3;
 
 //'arrays'
@@ -32,12 +32,6 @@ var enemies = [];
 
 var player = new Player();
 var keyboard = new Keyboard();
-
-//var KEY_SPACE = 32;
-//var KEY_LEFT = 37;
-//var KEY_UP = 38;
-//var KEY_RIGHT = 39;
-//var KEY_DOWN = 40;
 
 var LAYER_BACKGOUND = 0;
 var LAYER_PLATFORMS = 1;
@@ -239,9 +233,6 @@ function initialize() {
 					// (because our collision squares are 64x64 but the tile in the
 					// level are 64x64)
 					cells[layerIdx][y][x] = 1;
-				//	cells[layerIdx][y - 1][x] = 1;
-				//	cells[layerIdx][y - 1][x + 1] = 1;
-				//	cells[layerIdx][y][x + 1] = 1;
 				} else if (cells[layerIdx][y][x] != 1) {
 					// if we haven't set this cell's value, then set it to 0 now
 					cells[layerIdx][y][x] = 0;
@@ -291,9 +282,6 @@ function run(deltaTime)
     }
 }
 
-
-
- 
 initialize();
 
 
