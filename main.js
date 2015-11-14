@@ -174,7 +174,7 @@ function runGame()
 		bullets[i].draw();
 	}
 	
-		for(var i=0; i < bullets.length; i++)
+	for(var i=0; i < bullets.length; i++)
 	{
 		bullets[i].update(deltaTime);
 		if(bullets[i].position.x - worldOffsetX > SCREEN_WIDTH)
@@ -188,6 +188,11 @@ function runGame()
 		}
 	}
 	
+	for(var i=0; i<enemies.length; i++)
+	{
+		enemies[i].update(deltaTime);
+		enemies[i].draw();
+	}
 }
 
 function runGameOver(deltaTime)
@@ -212,8 +217,8 @@ function spawnEnemy() {
             if (level1.layers[LAYER_OBJECT_ENEMIES].data[idx] != 0) {
                 var px = tileToPixel(x);
                 var py = tileToPixel(y);
-                //var e = new Enemy(px, py);
-                //enemies.push(e);
+                var e = new Enemy(px, py);
+                enemies.push(e);
             }
             idx++;
         }
