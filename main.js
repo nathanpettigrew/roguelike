@@ -41,8 +41,6 @@ var LAYER_COUNT = 3;
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
-
-
 //tile variables
 var TILE = 64;
 var MAP = {tw:64, th:64};
@@ -173,18 +171,14 @@ var heartImage = document.createElement ("img");
 heartImage.src = "heartImage.png";
 
 var player = new Player();
+
 function runSplash(deltaTime) {
     splashTimer -= deltaTime;
 	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) 
 	{
 		gameState = STATE_GAME;
 	}
-    if (splashTimer <= 0) {
-        gameState = STATE_GAME;
-		enemies.splice(0, enemies.length)
-		spawnEnemy();
-        return;
-    }
+
 	context.drawImage(splashImage, 0,0);
     context.fillStyle = "#FFF";
     context.font = "24px Papyrus EF";
@@ -209,7 +203,40 @@ function runGame()
 		bullets[i].draw();
 	}
 	
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("Lives:", 20, 30, 100);
+	
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("Enemies Remaining: " + score, 550, 30, 240);
+
+	for(var i = 0; i < lives; i++) {
+		context.drawImage(heartImage, 90 + ((heartImage.width + 2) * i), 10);
+	}
+
 	var hit = false;
+	for(var i=0; i < bullets.length; i++)
+	{
+		bullets[i].update(deltaTime);
+		if(bullets[i].position.x - worldOffsetX > SCREEN_WIDTH)
+		{
+			hit = true;
+		}
+	}
+
+	for(var j=0; j<enemies.length; j++)
+	{
+		if(intersects(player.position.x, player.position.y, TILE, TILE, 
+		enemies[j].position.x, enemies[j].position.y, TILE, TILE) == true)
+		{
+			enemies.splice(j, 1);
+			lives -= 1;
+			score -= 1;
+		}
+	}
+
+
 	for(var i=0; i < bullets.length; i++)
 	{
 		bullets[i].update(deltaTime);
@@ -244,32 +271,37 @@ function runGame()
 		enemies[i].draw();
 	}
 	
-	for(var i = 0; i < lives; i++) {
-		context.drawImage(heartImage, 90 + ((heartImage.width + 2) * i), 10);
+
+	if (lives <= 0)
+	{
+		gameState = runGameOver;
 	}
-	
-	context.fillStyle = "#FFF";
-	context.font = "24px Arial";
-	context.fillText("Lives:", 20, 30, 100);
-	
-	context.fillStyle = "#FFF";
-	context.font = "24px Arial";
-	context.fillText("Enemies Remaining: " + score, 550, 30, 240);
+
+	if (score <= 0)
+	{
+		gameState = runGameWin
+	}
 }
 
 function runGameOver(deltaTime)
 {
-	
-	player.update(deltaTime);
-    player.draw();
-	splashTimer -= deltaTime;
-	if(splashTimer <= 0)
-	{
-		player.isDead = false;
-		splashTimer = 3;
-		gameState = STATE_SPLASH;
-		return;
-	}
+	context.fillStyle = "#ccc"
+	context.fillRect(0, 0, canvas.width, canvas.height);
+
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("GAME OVER, YOU LOOSE", 250, 280);
+
+}
+
+function runGameWin(deltaTime)
+{
+	context.fillStyle = "#ccc"
+	context.fillRect(0, 0, canvas.width, canvas.height);
+
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("YOU WIN", 250, 280);
 }
 
 function spawnEnemy() {
@@ -351,19 +383,10 @@ function run(deltaTime)
 		case STATE_GAMEOVER:
 			runGameOver(deltaTime);
 			break;
+		case STATE_WIN:
+			runGameWin(deltaTime);
+			break;
 	}
-
-	if(lives ==0 )
-	{
-		player.isDead = true;
-		gameState = STATE_GAMEOVER;		
-	}
-	
-    if (player.isDead == true) {
-        enemies.splice(0, enemies.length)
-        spawnEnemy();
-        gameState = STATE_GAMEOVER;
-    }
 }
 
 initialize();
