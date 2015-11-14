@@ -20,7 +20,7 @@ var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
 var STATE_WIN = 3;
 var lives = 3;
-var score = 1;
+var score = 15;
 var gameState = STATE_SPLASH;
 
 //functions for Gamestates
