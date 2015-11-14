@@ -20,7 +20,7 @@ var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
 var STATE_WIN = 3;
 var lives = 3;
-var score = 15;
+var score = 1;
 var gameState = STATE_SPLASH;
 
 //functions for Gamestates
@@ -197,6 +197,7 @@ function runGame()
 	context.fillStyle = "#ccc"
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	
+	
 	var deltaTime = getDeltaTime();
 		
 	drawMap();
@@ -209,7 +210,14 @@ function runGame()
 		bullets[i].draw();
 	}
 	
-	var hit = false;
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("Lives:", 20, 30, 100);
+	
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("Enemies Remaining: " + score, 375, 30, 240);
+	
 	for(var i=0; i < bullets.length; i++)
 	{
 		bullets[i].update(deltaTime);
@@ -259,28 +267,38 @@ function runGame()
 		context.drawImage(heartImage, 90 + ((heartImage.width + 2) * i), 10);
 	}
 	
-	context.fillStyle = "#FFF";
-	context.font = "24px Arial";
-	context.fillText("Lives:", 20, 30, 100);
+	if (score <= 0)
+	{
+		gameState = STATE_WIN;
+		return;
+	}
 	
-	context.fillStyle = "#FFF";
-	context.font = "24px Arial";
-	context.fillText("Enemies Remaining: " + score, 375, 30, 240);
+	if (lives <= 0)
+	{
+		gameState = STATE_GAMEOVER;
+		return;
+	}
 }
 
 function runGameOver(deltaTime)
 {
+	context.fillStyle = "#ccc"
+	context.fillRect(0, 0, canvas.width, canvas.height);
 	
-	player.update(deltaTime);
-    player.draw();
-	splashTimer -= deltaTime;
-	if(splashTimer <= 0)
-	{
-		player.isDead = false;
-		splashTimer = 3;
-		gameState = STATE_SPLASH;
-		return;
-	}
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("GAME OVER", 250, 250);
+	
+}
+
+function runGameWin(deltaTime)
+{
+	context.fillStyle = "#ccc"
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("YOU WIN", 250, 250);
 }
 
 function spawnEnemy() {
@@ -361,6 +379,9 @@ function run(deltaTime)
 			break;
 		case STATE_GAMEOVER:
 			runGameOver(deltaTime);
+			break;
+		case STATE_WIN:
+		runGameWin(deltaTime);
 			break;
 	}
 	   //display score
