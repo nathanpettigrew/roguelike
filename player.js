@@ -22,17 +22,39 @@ var Player = function()
 	this.image.src = "mage.png";
 }
 
+var temTT = 0;
+
+var staticX = 320;
+
 Player.prototype.update = function(deltaTime)
-{		
+{	
 	
+	// var oldX = this.position.x;
+	// var oldY = this.position.y;
+	
+	
+	// //temTT += 0.015;
+	// temTT += deltaTime;
+	// //deltaTime = 0.0015;
+	// var temVal = temTT;
+	
+	
+	// var tempX = staticX - (300 *(Math.cos(temTT)));
+	// //var tempX = 320;
+	// var tempY = 260;
+	
+	// this.position.x = tempX;
+	// this.position.y = tempY;
+	
+	// 
 	var left = false;
 	var right = false;
 	var up = false;
 	var down = false;
 	
-	if(this.cooldownTimer > 0)
+	if(this.cooldowntimer > 0)
 	{
-		this.cooldownTimer -=deltaTime;
+		this.cooldowntimer -=deltatime;
 	}
 
 	if(keyboard.isKeyDown(keyboard.KEY_W) == true)
@@ -63,24 +85,37 @@ Player.prototype.update = function(deltaTime)
 	var ddx = 0;
 	var ddy = 0;
 	
-	if (left)
-		ddx = ddx - ACCEL;
-	else if (wasleft)
-		ddx = ddx + FRICTION;
-	if (right)
-		ddx = ddx + ACCEL;
-	else if (wasright)
-		ddx = ddx - FRICTION;
+	if (left) {
+		this.position.x -= MAXDX * deltaTime;
+	}
+	if (right) {
+		this.position.x += MAXDX * deltaTime;
+	}
+	if (up) {
+		this.position.y -= MAXDY * deltaTime;
+	}
+	if (down) {
+		this.position.y += MAXDY * deltaTime;
+	}
 	
-	if (up)
-		ddy = ddy + ACCEL;
-	else if (wasup)
-		ddy = ddy - FRICTION;
+	// if (left)
+		// ddx = - ACCEL;
+	// else if (wasleft)
+		// ddx = + FRICTION;
+	// if (right)
+		// ddx = + ACCEL;
+	// else if (wasright)
+		// ddx = - FRICTION;
 	
-	if (down)
-		ddy = ddy - ACCEL;
-	else if (wasdown)
-		ddy = ddy + FRICTION;
+	// if (up)
+		// ddy = - ACCEL;
+	// else if (wasup)
+		// ddy = + FRICTION;
+	
+	// if (down)
+		// ddy = + ACCEL;
+	// else if (wasdown)
+		// ddy = - FRICTION;
 	
 	if(keyboard.isKeyDown(keyboard.KEY_UP) == true && this.cooldownTimer <= 0)
 	{
@@ -115,20 +150,23 @@ Player.prototype.update = function(deltaTime)
 	}
 	
 	// calculate the new position and velocity:
-	this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
-	this.position.x = Math.floor(this.position.x + (deltaTime * this.velocity.x));
-	this.velocity.x = bound(this.velocity.x + (deltaTime * ddx), -MAXDX, MAXDX); 
-	this.velocity.y = bound(this.velocity.y + (deltaTime * ddy), -MAXDY, MAXDY);
+	// this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
+	// this.position.x = Math.floor(this.position.x + (deltaTime * this.velocity.x));
+	// this.velocity.x = bound(this.velocity.x + (deltaTime * ddx), -MAXDX, MAXDX); 
+	// this.velocity.y = bound(this.velocity.y + (deltaTime * ddy), -MAXDY, MAXDY);
 	
-	if ((wasleft && (this.velocity.x > 0)) || (wasright && (this.velocity.x < 0)))
-	{
-		this.velocity.x = 0;
-	}
+	this.position.x = Math.round(this.position.x);
+	this.position.y = Math.round(this.position.y);
 	
-	if ((wasup && (this.velocity.y > 0)) || (wasdown && (this.velocity.y < 0)))
-	{
-		this.velocity.y = 0;
-	}
+	// if ((wasleft && (this.velocity.x > 0)) || (wasright && (this.velocity.x < 0)))
+	// {
+		// this.velocity.x = 0;
+	// }
+	
+	// if ((wasup && (this.velocity.y > 0)) || (wasdown && (this.velocity.y < 0)))
+	// {
+		// this.velocity.y = 0;
+	// }
 
 	// collision detection
 	// Our collision detection logic is greatly simplified by the fact that the player is a rectangle
@@ -145,42 +183,64 @@ Player.prototype.update = function(deltaTime)
 	var celldown = cellAtTileCoord(LAYER_PLATFORMS, tx, ty + 1);
 	var celldiag = cellAtTileCoord(LAYER_PLATFORMS, tx + 1, ty + 1);
 	
-	if (this.velocity.x > 0) 
+	if (right) 
 	{
-		 if ((cellright && !cell) || (celldiag && !celldown && ny)) {
+		if ((cellright && !cell) || (celldiag && !celldown && ny))
+		{
 		 // clamp the x position to avoid moving into the platform we just hit
 		 this.position.x = tileToPixel(tx);
-		 this.velocity.x = 0; // stop horizontal velocity
-		 }
-	}
-	
-		else if (this.velocity.x < 0) 
-		{
-		 if ((cell && !cellright) || (celldown && !celldiag && ny)) {
-		// clamp the x position to avoid moving into the platform we just hit
-		this.position.x = tileToPixel(tx + 1);
-		this.velocity.x = 0; // stop horizontal velocity
-		 }
-	}
-	
-	if (this.velocity.y > 0) 
-	{
-		((celldown && !cell) || (celldiag && !cellright && nx))
-		{
-			this.position.y = tileToPixel(ty);
-			this.velocity.y = 0;
-			ny = 0;
+		 // this.velocity.x = 0; // stop horizontal velocity
 		}
 	}
-	else if (this.velocity.y < 0) 
+	if (left) 
 	{
-		if ((cell && celldown) || (cellright && !celldiag && nx))
+		 if ((cell && !cellright) || (celldown && !celldiag && ny)) 
+		 {
+			// clamp the x position to avoid moving into the platform we just hit
+			this.position.x = tileToPixel(tx + 1);
+			// this.velocity.x = 0; // stop horizontal velocity
+		 }
+	}
+	
+	// cell     cellright
+	// celldown celldiag
+	
+	if (down) 
+	{
+		if ((celldown && !cell) || (celldiag && !cellright && nx))
 		{
+		 // clamp the x position to avoid moving into the platform we just hit
+		 this.position.y = tileToPixel(ty);
+		 // this.velocity.x = 0; // stop horizontal velocity
+		}
+	}
+	if (up) 
+	{
+		 if ((cell && !celldown) || (cellright && !celldiag && nx)) 
+		 {
+			// clamp the x position to avoiwwd moving into the platform we just hit
 			this.position.y = tileToPixel(ty + 1);
-			this.velocity.y = 0;
-			ny = 0;
-		}
+			// this.velocity.x = 0; // stop horizontal velocity
+		 }
 	}
+	
+	
+	// if (this.velocity.y > 0) 
+	// {
+		// ((celldown && !cell) || (celldiag && !cellright && nx))
+		// {
+			// this.position.y = tileToPixel(ty);
+			// this.velocity.y = 0;
+		// }
+	// }
+	// else if (this.velocity.y < 0) 
+	// {
+		// if ((cell && !celldown) || (cellright && !celldiag && nx))
+		// {
+			// this.position.y = tileToPixel(ty + 1);
+			// this.velocity.y = 0;
+		// }
+	// }
 
 }
 
