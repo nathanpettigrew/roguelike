@@ -16,26 +16,21 @@ var Bullet = function(x, y, direction)
 	this.velocity = new Vector2();
 	
 	this.direction = direction;
-	
-	this.rotate = 0;
 
 	if(this.direction == LEFT)
 	{
-		this.velocity.set(-MAXDX * 0.5, 0);
-		this.rotate += 90;
+		this.velocity.set(-MAXDX * 1, 0);
 	}
 	else if (this.direction == RIGHT) 
 	{
-		this.velocity.set(MAXDX * 0.5, 0);
-		this.rotate -= 90;
+		this.velocity.set(MAXDX * 1, 0);
 	}
 	else if (this.direction == UP)
 	{
-		this.velocity.set(0, -MAXDY * 0.5);
-		this.rotate += 180;
+		this.velocity.set(0, -MAXDY * 1);
 	}
 	else
-		this.velocity.set(0, MAXDY * 0.5);
+		this.velocity.set(0, MAXDY * 1);
 }
 
 Bullet.prototype.update = function(deltaTime)
