@@ -18,8 +18,10 @@ function getDeltaTime()		//Only call this function once per frame
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
+var STATE_WIN = 3;
+var lives = 3;
+var score = 0;
 var gameState = STATE_SPLASH;
-
 
 	//functions for Gamestates
 var splashTimer = 3;
@@ -45,6 +47,8 @@ var LAYER_COUNT = 3;
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
+
+
 //tile variables
 var TILE = 64;
 var MAP = {tw:64, th:64};
@@ -56,10 +60,11 @@ var LAYER_COUNT = 3;
 var TILESET_SPACING = 0;
 
 //Collision constants
+//changed MAXDX and MAXDY to metre * 5, to achieve with desired speed
 var METER = TILE;
-var MAXDX = METER * 10;
-var MAXDY = METER * 10;
-var ACCEL = MAXDX * 2;
+var MAXDX = METER * 5;
+var MAXDY = METER * 5;
+var ACCEL = MAXDX;
 var FRICTION = MAXDX * 2;
 var cells = [];
 var tileset = document.createElement("img");
@@ -135,17 +140,27 @@ function drawMap()
 	}
 }
 
+var splashImage = document.createElement ("img");
+splashImage.src = "ft00.jpg";
 
-
-function runSplash (deltaTime)
-{
-	context.fillStyle = "#ccc"
-	context.fillRect(0, 0, canvas.width, canvas.height);
-
+var player = new Player();
+function runSplash(deltaTime) {
+    splashTimer -= deltaTime;
 	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) 
 	{
 		gameState = STATE_GAME;
 	}
+    if (splashTimer <= 0) {
+        gameState = STATE_GAME;
+		enemies.splice(0, enemies.length)
+		spawnEnemy();
+        return;
+    }
+	context.drawImage(splashImage, 0,0);
+    context.fillStyle = "#FFF";
+    context.font = "24px Papyrus EF";
+    context.fillText("Rougelike", 210, 250);
+	context.fillText("Press space to Enter World", 150, 311);
 }
 
 function runGame()
@@ -244,6 +259,8 @@ function run(deltaTime)
 	context.fillStyle = "#ccc";
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	
+	gameState == STATE_SPLASH
+	
 	switch(gameState)
 	{
 		case STATE_SPLASH:
@@ -256,7 +273,24 @@ function run(deltaTime)
 			runGameOver(deltaTime);
 			break;
 	}
+	   //display score
+    context.fillStyle = "#000";
+    context.font = "32px Comic Sans MS";
+    context.fillText("Score: " + score, 800, 40);
+
+	if(lives ==0 )
+	{
+		player.isDead = true;
+		gameState = STATE_GAMEOVER;		
+	}
+	
+    if (player.isDead == true) {
+        enemies.splice(0, enemies.length)
+        spawnEnemy();
+        gameState = STATE_GAMEOVER;
+    }
 }
+
 
 
  
@@ -288,4 +322,4 @@ initialize();
   
   window.onEachFrame = onEachFrame;
 })();
-window.onEachFrame(runGame);
+window.onEachFrame(run);
