@@ -83,25 +83,29 @@ Player.prototype.update = function(deltaTime)
 		{
 			var bullet = new Bullet(this.position.x, this.position.y, UP);
 			bullets.push(bullet);	
+			sfxFire.play();
 			this.cooldownTimer = 0.3;
 		}
 		if(keyboard.isKeyDown(keyboard.KEY_DOWN))
 		{
 			var bullet = new Bullet(this.position.x, this.position.y, DOWN);
 			bullets.push(bullet);	
+			sfxFire.play();
 			this.cooldownTimer = 0.3;		
 		}
 			
 		if(keyboard.isKeyDown(keyboard.KEY_LEFT))
 		{	
 			var bullet = new Bullet(this.position.x, this.position.y, LEFT);
-			bullets.push(bullet);		
+			bullets.push(bullet);
+			sfxFire.play();			
 			this.cooldownTimer = 0.3;
 		}
 		if(keyboard.isKeyDown(keyboard.KEY_RIGHT))
 		{
 			var bullet = new Bullet(this.position.x, this.position.y, RIGHT);
 			bullets.push(bullet);	
+			sfxFire.play();
 			this.cooldownTimer = 0.3;		
 		}
 	

@@ -242,7 +242,24 @@ function initialize() {
 		}
 	}
     spawnEnemy();
- 
+	
+	 musicBackground = new Howl(
+	 {
+		 urls: ["Forest Song.ogg"],
+		 loop: true,
+		 buffer: true,
+		 volume: 0.5
+	 });
+	 musicBackground.play();
+	 
+	 sfxFire = new Howl(
+	 {
+		 urls: ["fireball.ogg"],
+		 buffer: true,
+		 volume: 1,
+	 }
+	 );
+	
     };
 
 function run(deltaTime) 
