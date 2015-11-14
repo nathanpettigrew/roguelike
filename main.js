@@ -188,8 +188,8 @@ function runSplash(deltaTime) {
 	context.drawImage(splashImage, 0,0);
     context.fillStyle = "#FFF";
     context.font = "24px Papyrus EF";
-    context.fillText("Rougelike", 320, 250);
-	context.fillText("Press space to Enter World", 240, 311);
+    context.fillText("Rougelike", 210, 250);
+	context.fillText("Press space to Enter World", 150, 311);
 }
 
 function runGame()
@@ -254,7 +254,7 @@ function runGame()
 	
 	context.fillStyle = "#FFF";
 	context.font = "24px Arial";
-	context.fillText("Enemies Remaining: " + score, 575, 30, 240);
+	context.fillText("Enemies Remaining: " + score, 375, 30, 240);
 }
 
 function runGameOver(deltaTime)
@@ -352,6 +352,11 @@ function run(deltaTime)
 			runGameOver(deltaTime);
 			break;
 	}
+	   //display score
+    context.fillStyle = "#000";
+    context.font = "32px Comic Sans MS";
+    context.fillText("Score: " + score, 800, 40);
+
 	if(lives ==0 )
 	{
 		player.isDead = true;
