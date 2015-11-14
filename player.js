@@ -17,7 +17,7 @@ var Player = function()
 	
 	this.velocity = new Vector2();
 	
-	this.cooldownTimer = 0;
+	this.cooldownTimer = 0.3;
 	
 	this.image.src = "mage.png";
 }
@@ -52,10 +52,6 @@ Player.prototype.update = function(deltaTime)
 	var up = false;
 	var down = false;
 	
-	if(this.cooldowntimer > 0)
-	{
-		this.cooldowntimer -=deltatime;
-	}
 
 	if(keyboard.isKeyDown(keyboard.KEY_W) == true)
 	{
@@ -116,38 +112,70 @@ Player.prototype.update = function(deltaTime)
 		// ddy = + ACCEL;
 	// else if (wasdown)
 		// ddy = - FRICTION;
+	this.cooldownTimer -= deltaTime;
+	if (this.cooldownTimer <= 0)
+	{
+		if(keyboard.isKeyDown(keyboard.KEY_UP))
+		{
+			var bullet = new Bullet(this.position.x, this.position.y, UP);
+			bullets.push(bullet);	
+			this.cooldownTimer = 0.3;
+		}
+		if(keyboard.isKeyDown(keyboard.KEY_DOWN))
+		{
+			var bullet = new Bullet(this.position.x, this.position.y, DOWN);
+			bullets.push(bullet);	
+			this.cooldownTimer = 0.3;		
+		}
+			
+		if(keyboard.isKeyDown(keyboard.KEY_LEFT))
+		{	
+			var bullet = new Bullet(this.position.x, this.position.y, LEFT);
+			bullets.push(bullet);		
+			this.cooldownTimer = 0.3;
+		}
+		if(keyboard.isKeyDown(keyboard.KEY_RIGHT))
+		{
+			var bullet = new Bullet(this.position.x, this.position.y, RIGHT);
+			bullets.push(bullet);	
+			this.cooldownTimer = 0.3;		
+		}
 	
-	if(keyboard.isKeyDown(keyboard.KEY_UP) == true && this.cooldownTimer <= 0)
-	{
-		this.cooldownTimer = 0.3;
-
-		var bullet = new Bullet(this.position.x, this.position.y, UP);
-		bullets.push(bullet);		
 	}
+	
+	
+	
+	// if(keyboard.isKeyDown(keyboard.KEY_UP) == true && this.cooldownTimer <= 0)
+	// {
+		
 
-	if(keyboard.isKeyDown(keyboard.KEY_DOWN) == true && this.cooldownTimer <= 0)
-	{
-		this.cooldownTimer = 0.3;
+		// var bullet = new Bullet(this.position.x, this.position.y, UP);
+		// bullets.push(bullet);		
+	// }
 
-		var bullet = new Bullet(this.position.x, this.position.y, DOWN);
-		bullets.push(bullet);		
-	}
+	// if(keyboard.isKeyDown(keyboard.KEY_DOWN) == true && this.cooldownTimer <= 0)
+	// {
+		// this.cooldownTimer = 0.3;
 
-	if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true && this.cooldownTimer <= 0)
-	{
-		this.cooldownTimer = 0.3;
+		// var bullet = new Bullet(this.position.x, this.position.y, DOWN);
+		// bullets.push(bullet);		
+	// }
 
-		var bullet = new Bullet(this.position.x, this.position.y, LEFT);
-		bullets.push(bullet);		
-	}
+	// if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true && this.cooldownTimer <= 0)
+	// {
+		// this.cooldownTimer = 0.3;
 
-	if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true && this.cooldownTimer <= 0)
-	{
-		this.cooldownTimer = 0.3;
+		// var bullet = new Bullet(this.position.x, this.position.y, LEFT);
+		// bullets.push(bullet);		
+	// }
 
-		var bullet = new Bullet(this.position.x, this.position.y, RIGHT);
-		bullets.push(bullet);		
-	}
+	// if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true && this.cooldownTimer <= 0)
+	// {
+		// this.cooldownTimer = 0.3;
+
+		// var bullet = new Bullet(this.position.x, this.position.y, RIGHT);
+		// bullets.push(bullet);		
+	// }
 	
 	// calculate the new position and velocity:
 	// this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
