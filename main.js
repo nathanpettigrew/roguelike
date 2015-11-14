@@ -169,6 +169,8 @@ function drawMap(){
 
 var splashImage = document.createElement ("img");
 splashImage.src = "ft00.jpg";
+var heartImage = document.createElement ("img");
+heartImage.src = "heartImage.png";
 
 var player = new Player();
 function runSplash(deltaTime) {
@@ -226,6 +228,18 @@ function runGame()
 		enemies[i].update(deltaTime);
 		enemies[i].draw();
 	}
+	
+	for(var i = 0; i < lives; i++) {
+		context.drawImage(heartImage, 90 + ((heartImage.width + 2) * i), 10);
+	}
+	
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("Lives:", 20, 30, 100);
+	
+	context.fillStyle = "#FFF";
+	context.font = "24px Arial";
+	context.fillText("Enemies Remaining: " + score, 375, 30, 240);
 }
 
 function runGameOver(deltaTime)
