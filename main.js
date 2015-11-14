@@ -238,6 +238,17 @@ function runGame()
 		}
 	}
 	
+	for(var j=0; j<enemies.length; j++)
+	{
+		if(intersects(player.position.x, player.position.y, TILE, TILE, 
+		enemies[j].position.x, enemies[j].position.y, TILE, TILE) == true)
+		{
+			enemies.splice(j, 1);
+			score -= 1;
+			lives -= 1;
+		}
+	}
+	
 	for(var i=0; i<enemies.length; i++)
 	{
 		enemies[i].update(deltaTime);
